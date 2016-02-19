@@ -20,4 +20,5 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.2.0'
 
-gem 'decisiontree'
+gem 'awesome_print'
+gem 'decisiontree', :git => 'git://github.com/rokibulhassan/decisiontree.git'

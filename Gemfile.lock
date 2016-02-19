@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/rokibulhassan/decisiontree.git
+  revision: 20e7d8388e89c8974923bc2bab4092b28da556b3
+  specs:
+    decisiontree (0.5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,6 +43,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
+    awesome_print (1.1.0)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.2)
@@ -48,7 +55,6 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.0)
-    decisiontree (0.5.0)
     erubis (2.7.0)
     execjs (2.6.0)
     globalid (0.3.6)
@@ -159,9 +165,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   bootstrap-sass (~> 3.2.0)
   coffee-rails (~> 4.1.0)
-  decisiontree
+  decisiontree!
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
