@@ -1,0 +1,12 @@
+psql: &psql
+  adapter: postgresql
+  username: rokibul
+  password:
+
+development:
+  <<: *psql
+  database: learning_discrete_dev
+
+test: &test
+  <<: *psql
+  database: learning_discrete_test
