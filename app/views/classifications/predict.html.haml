@@ -1,0 +1,33 @@
+%div.row
+  .col-md-10
+    %h1 Predicts
+  .col-md-2.text-right
+    = link_to 'New Prediction', sample_classifications_path, class: 'btn btn-sm btn-info'
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
+      %th Pregnant
+      %th Oral glucose tolerance
+      %th Blood pressure
+      %th Skin fold thickness
+      %th Serum insulin
+      %th Body mass index
+      %th Pedigree function
+      %th Age
+      %th Positive
+      %th Decision
+
+  %tbody
+    - @predictions.each do |predict|
+      - diabetic = predict[:sample]
+      %tr
+        %td= diabetic[0]
+        %td= diabetic[1]
+        %td= diabetic[2]
+        %td= diabetic[3]
+        %td= diabetic[4]
+        %td= diabetic[5]
+        %td= diabetic[6]
+        %td= diabetic[7]
+        %td= diabetic[8]
+        %td= predict[:decision]

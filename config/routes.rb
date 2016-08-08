@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   resources :diabetics
+  resources :classifications do
+    collection do
+      get :predict
+      get :sample
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

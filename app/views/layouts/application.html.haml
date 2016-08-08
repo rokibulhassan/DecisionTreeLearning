@@ -21,6 +21,7 @@
           %a.navbar-brand{:href => "/", :'data-no-turbolink' => true} Decision Tree
         .collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav.navbar-right.navbar-user
+            %li= link_to 'Predict', predict_classifications_path
 
     .container
       = yield
