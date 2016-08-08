@@ -1,0 +1,16 @@
+= simple_form_for(@diabetic) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :pregnant
+    = f.input :oral_glucose_tolerance
+    = f.input :blood_pressure
+    = f.input :skin_fold_thickness
+    = f.input :serum_insulin
+    = f.input :body_mass_index
+    = f.input :pedigree_function
+    = f.input :age
+    = f.input :positive
+
+  .form-actions
+    = f.button :submit

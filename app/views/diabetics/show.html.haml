@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Pregnant:
+  = @diabetic.pregnant
+%p
+  %b Oral glucose tolerance:
+  = @diabetic.oral_glucose_tolerance
+%p
+  %b Blood pressure:
+  = @diabetic.blood_pressure
+%p
+  %b Skin fold thickness:
+  = @diabetic.skin_fold_thickness
+%p
+  %b Serum insulin:
+  = @diabetic.serum_insulin
+%p
+  %b Body mass index:
+  = @diabetic.body_mass_index
+%p
+  %b Pedigree function:
+  = @diabetic.pedigree_function
+%p
+  %b Age:
+  = @diabetic.age
+%p
+  %b Positive:
+  = @diabetic.positive
+
+= link_to 'Edit', edit_diabetic_path(@diabetic)
+\|
+= link_to 'Back', diabetics_path

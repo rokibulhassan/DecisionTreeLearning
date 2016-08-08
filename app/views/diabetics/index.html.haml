@@ -1,0 +1,36 @@
+%div.row
+  .col-md-10
+    %h1 Diabetics data
+  .col-md-2.text-right
+    = link_to 'New Diabetic', new_diabetic_path, class: 'btn btn-sm btn-info'
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
+      %th Pregnant
+      %th Oral glucose tolerance
+      %th Blood pressure
+      %th Skin fold thickness
+      %th Serum insulin
+      %th Body mass index
+      %th Pedigree function
+      %th Age
+      %th Positive
+      %th Action
+
+  %tbody
+    - @diabetics.each do |diabetic|
+      %tr
+        %td= diabetic.pregnant
+        %td= diabetic.oral_glucose_tolerance
+        %td= diabetic.blood_pressure
+        %td= diabetic.skin_fold_thickness
+        %td= diabetic.serum_insulin
+        %td= diabetic.body_mass_index
+        %td= diabetic.pedigree_function
+        %td= diabetic.age
+        %td= diabetic.positive
+        %td
+          = link_to 'Show', diabetic
+          = link_to 'Edit', edit_diabetic_path(diabetic)
+          = link_to 'Destroy', diabetic, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
