@@ -13,21 +13,18 @@
 
 ActiveRecord::Schema.define(version: 20160808053929) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "diabetics", force: :cascade do |t|
-    t.float    "pregnant"
-    t.float    "oral_glucose_tolerance"
-    t.float    "blood_pressure"
-    t.float    "skin_fold_thickness"
-    t.float    "serum_insulin"
-    t.float    "body_mass_index"
-    t.float    "pedigree_function"
-    t.float    "age"
-    t.integer  "positive"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.float    "pregnant",               limit: 24
+    t.float    "oral_glucose_tolerance", limit: 24
+    t.float    "blood_pressure",         limit: 24
+    t.float    "skin_fold_thickness",    limit: 24
+    t.float    "serum_insulin",          limit: 24
+    t.float    "body_mass_index",        limit: 24
+    t.float    "pedigree_function",      limit: 24
+    t.float    "age",                    limit: 24
+    t.integer  "positive",               limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

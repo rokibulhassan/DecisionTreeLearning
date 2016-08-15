@@ -11,7 +11,7 @@ class CreateDiabetics < ActiveRecord::Migration
       t.float :age
       t.integer :positive
 
-      t.timestamps null: false
+      t.timestamps
     end
   end
 end

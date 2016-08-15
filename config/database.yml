@@ -1,12 +1,9 @@
-psql: &psql
-  adapter: postgresql
-  username: rokibul
-  password:
-
 development:
-  <<: *psql
+  adapter: mysql2
+  encoding: utf8
+  reconnect: true
+  pool: 5
+  username: root
+  password: root
+  host: 127.0.0.1
   database: learning_discrete_dev
-
-test: &test
-  <<: *psql
-  database: learning_discrete_test

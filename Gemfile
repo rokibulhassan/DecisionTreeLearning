@@ -4,6 +4,10 @@ ruby '2.2.2'
 gem 'rails', '4.2.5'
 gem 'pg'
 
+group :development do
+  gem 'mysql2'
+end
+
 group :production do
   gem 'rails_12factor'
 end

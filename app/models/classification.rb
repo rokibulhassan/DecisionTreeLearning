@@ -18,8 +18,7 @@ class Classification
                    '2-Hour serum insulin (mu U/ml)',
                    'Body mass index (weight in kg/(height in m)^2)',
                    'Diabetes pedigree function',
-                   'Age (years)',
-                   'Tested positive for Diabetes']
+                   'Age (years)']
 
     @training = Diabetic.all.collect { |d| [d.pregnant,
                                             d.oral_glucose_tolerance,
@@ -33,19 +32,18 @@ class Classification
   end
 
   def predict(sample=nil)
-    dec_tree = DecisionTree::ID3Tree.new(@attributes, @training, 1, :discrete)
+    dec_tree = DecisionTree::ID3Tree.new(@attributes, @training, 1, :continuous)
     dec_tree.train
 
     sample ||= @training.first
     decision = dec_tree.predict(sample)
-    #puts "Sample: #{sample} ... [Predicted:Decision] [#{decision}:#{sample.last}] ... [Predicted==Decision] #{decision == sample.last}"
-    return [{sample: sample, decision: decision}]
+    return [{:sample => sample, :decision => decision}]
   end
 
   def random
     results = []
-    10.times do
-      results << predict([random_input, random_input, random_input, random_input, random_input, random_input, random_input, random_input, [1, 0].sample])
+    5.times do
+      results << predict([random_input, random_input, random_input, random_input, random_input, random_input, random_input, random_input, 0])
     end
     results.flatten!
   end
