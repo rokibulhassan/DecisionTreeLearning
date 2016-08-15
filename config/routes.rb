@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :classifications do
     collection do
       get :predict
+      get :knowledge_base
       get :sample
     end
   end

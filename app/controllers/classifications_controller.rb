@@ -12,7 +12,11 @@ class ClassificationsController < ApplicationController
               diabetic[:age].to_f,
               diabetic[:positive].to_i] if diabetic.present?
 
-    @predictions = sample.present? ? Classification.new.predict(sample) : Classification.new.random
+    @predictions = sample.present? ? Classification.new.predict(sample) : Classification.new.knowledge_base
+  end
+
+  def knowledge_base
+    @predictions = Classification.new.knowledge_base
   end
 
   def sample

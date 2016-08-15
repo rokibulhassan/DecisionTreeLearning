@@ -6,7 +6,7 @@
         %meta{:content => "", :name => "description"}
           %meta{:content => "", :name => "author"}
             %title DecisionTree
-            = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+            = stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true
             = javascript_include_tag "application", "data-turbolinks-track" => true
             = csrf_meta_tags
   %body
@@ -22,6 +22,7 @@
         .collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav.navbar-right.navbar-user
             %li= link_to 'Predict', predict_classifications_path
+            %li= link_to 'Predict All', knowledge_base_classifications_path
 
     .container
       = yield

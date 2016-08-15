@@ -34,9 +34,9 @@ class Classification
   def predict(sample=nil)
     dec_tree = DecisionTree::ID3Tree.new(@attributes, @training, 1, :continuous)
     dec_tree.train
-
     sample ||= @training.first
     decision = dec_tree.predict(sample)
+    #ap dec_tree.send(:build_tree)
     return [{:sample => sample, :decision => decision}]
   end
 
@@ -50,6 +50,14 @@ class Classification
 
   def random_input (min=0.0, max=100.0)
     (rand * (max-min) + min).round(2)
+  end
+
+  def knowledge_base
+    results = []
+    Diabetic.find_each(:batch_size => 100) do |d|
+      results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
+    end
+    results.flatten!
   end
 
 end
