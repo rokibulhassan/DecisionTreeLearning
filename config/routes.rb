@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do
       get :predict
       get :knowledge_base
+      get :id3_tree
       get :sample
     end
   end

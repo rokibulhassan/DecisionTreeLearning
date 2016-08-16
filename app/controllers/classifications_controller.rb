@@ -19,6 +19,11 @@ class ClassificationsController < ApplicationController
     @predictions = Classification.new.knowledge_base
   end
 
+  def id3_tree
+    pdf_filename = File.join(Rails.root, "public/id3_tree.pdf")
+    send_file(pdf_filename, :filename => "id3_tree.pdf", :disposition => 'inline', :type => "application/pdf")
+  end
+
   def sample
     @diabetic = Diabetic.new
   end

@@ -36,7 +36,6 @@ class Classification
     dec_tree.train
     sample ||= @training.first
     decision = dec_tree.predict(sample)
-    # dec_tree.graph('id3_tree')
 
     return [{:sample => sample, :decision => decision}]
   end
@@ -59,6 +58,12 @@ class Classification
       results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!
+  end
+
+  def id3_tree
+    dec_tree = DecisionTree::ID3Tree.new(@attributes, @training, 1, :continuous)
+    dec_tree.train
+    dec_tree.graph('id3_tree')
   end
 
 end
