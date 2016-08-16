@@ -6,6 +6,29 @@
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
     %tr
+      %th.text-center{:colspan => 2} Actual
+      %th.text-center{:colspan => 2} Predicted
+      %th.text-center{:colspan => 2} Accuracy(%)
+    %tr
+      %th.text-center Positive
+      %th.text-center Negative
+      %th.text-center Positive
+      %th.text-center Negative
+      %th.text-center Positive
+      %th.text-center Negative
+
+  %tbody.text-center
+    %tr
+      %td= @actual_positive
+      %td= @actual_negative
+      %td= @predicted_positive
+      %td= @predicted_negative
+      %td= @percent_positive
+      %td= @percent_negative
+
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
       %th Pregnant
       %th Oral glucose tolerance
       %th Blood pressure
