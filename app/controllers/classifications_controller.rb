@@ -12,7 +12,16 @@ class ClassificationsController < ApplicationController
               diabetic[:age].to_f,
               diabetic[:positive].to_i] if diabetic.present?
 
-    @predictions = sample.present? ? Classification.new.predict(sample) : Classification.new.knowledge_base
+    @predictions = sample.present? ? Classification.new.predict(sample) : Classification.new.random
+
+    @actual_positive = @predictions.select { |p| p[:sample][8] == 1 }.count
+    @actual_negative = @predictions.select { |p| p[:sample][8] == 0 }.count
+
+    @predicted_positive = @predictions.select { |p| p[:decision] == 1 }.count
+    @predicted_negative = @predictions.select { |p| p[:decision] == 0 }.count
+
+    @percent_positive = calculate_accuracy(@actual_positive, @predicted_positive)
+    @percent_negative = calculate_accuracy(@actual_negative, @predicted_negative)
   end
 
   def knowledge_base
