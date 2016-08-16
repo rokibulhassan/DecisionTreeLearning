@@ -36,7 +36,8 @@ class Classification
     dec_tree.train
     sample ||= @training.first
     decision = dec_tree.predict(sample)
-    #ap dec_tree.send(:build_tree)
+    # dec_tree.graph('id3_tree')
+
     return [{:sample => sample, :decision => decision}]
   end
 
