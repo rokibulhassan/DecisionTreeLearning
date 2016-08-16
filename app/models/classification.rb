@@ -42,7 +42,7 @@ class Classification
 
   def random
     results = []
-    10.times do
+    5.times do
       results << predict([random_input, random_input, random_input, random_input, random_input, random_input, random_input, random_input, [1, 0].sample])
     end
     results.flatten!
