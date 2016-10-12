@@ -1,4 +1,6 @@
-= simple_form_for(@diabetic, url: predict_classifications_path, method: :get, wrapper: 'horizontal_form') do |f|
+- submit_path = predict_classifications_path
+- submit_path = knn_numerical_classifications_path if params[:knn_numerical].present?
+= simple_form_for(@diabetic, url: submit_path, method: :get, wrapper: 'horizontal_form') do |f|
   = f.error_notification
 
   .form-inputs
@@ -11,6 +13,7 @@
     = f.input :pedigree_function
     = f.input :age
     = f.input :positive
+    = f.input :radios, label: 'radious (K)' if params[:knn_numerical].present?
 
   .form-actions
     = f.button :submit, value: 'Submit'

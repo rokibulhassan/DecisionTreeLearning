@@ -1,5 +1,7 @@
 class Diabetic < ActiveRecord::Base
 
+  attr_accessor :radios
+
   scope :positive, -> { where(positive: 1) }
   scope :negative, -> { where(positive: 0) }
 

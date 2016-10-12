@@ -28,3 +28,5 @@ gem 'awesome_print'
 gem 'decisiontree', :git => 'git://github.com/rokibulhassan/decisiontree.git'
 gem 'graphr'
 gem 'ruby-graphviz'
+
+gem 'knn'

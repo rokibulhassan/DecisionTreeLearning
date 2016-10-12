@@ -1,0 +1,29 @@
+%div.row
+  .col-md-10
+    %h1 Predicts
+  .col-md-2.text-right
+    = link_to 'New Prediction', sample_classifications_path(:knn_numerical => true), :class => 'btn btn-sm btn-info'
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
+      %th.text-center Sample
+      %th.text-center Predicted
+      %th.text-center Accuracy(%)
+
+  %tbody.text-center
+    %tr
+      %td= @predictions[:sample]
+      %td= @predictions[:decision]
+      %td= '--'
+
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
+      %th Distance
+      %th Data Points
+
+  %tbody
+    - @predictions[:distances].each do |distance|
+      %tr
+        %td= distance[1]
+        %td= distance[2]
