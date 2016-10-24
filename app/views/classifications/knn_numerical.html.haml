@@ -1,20 +1,48 @@
 %div.row
   .col-md-10
-    %h1 Predicts
+    %h1 Predicts(learn with 60% and test with 40%)
   .col-md-2.text-right
     = link_to 'New Prediction', sample_classifications_path(:knn_numerical => true), :class => 'btn btn-sm btn-info'
+
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
+      %th.text-center{:colspan => 2} Actual
+      %th.text-center{:colspan => 2} Predicted
+      %th.text-center{:colspan => 2} Accuracy(%)
+    %tr
+      %th.text-center Positive
+      %th.text-center Negative
+      %th.text-center Positive
+      %th.text-center Negative
+      %th.text-center Positive
+      %th.text-center Negative
+
+  %tbody.text-center
+    %tr
+      %td= @actual_positive
+      %td= @actual_negative
+      %td= @predicted_positive
+      %td= @predicted_negative
+      %td= @percent_positive
+      %td= @percent_negative
+
+%h1 Samples
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
     %tr
       %th.text-center Sample
+      %th.text-center Actual
       %th.text-center Predicted
-      %th.text-center Accuracy(%)
 
   %tbody.text-center
-    %tr
-      %td= @predictions[:sample]
-      %td= @predictions[:decision]
-      %td= '--'
+    - @predictions.each do |prediction|
+      %tr
+        %td= prediction[:sample]
+        %td= prediction[:actual]
+        %td= prediction[:decision]
+
+%h1 Distances
 
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
@@ -23,7 +51,8 @@
       %th Data Points
 
   %tbody
-    - @predictions[:distances].each do |distance|
-      %tr
-        %td= distance[1]
-        %td= distance[2]
+    - @predictions.each do |prediction|
+      - prediction[:distances].each do |distance|
+        %tr
+          %td= distance[1]
+          %td= distance[2]

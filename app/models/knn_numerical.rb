@@ -11,15 +11,16 @@ class KnnNumerical
   # 9. tested_positive -> Class variable (0 or 1)
 
   def initialize
-    @training = Diabetic.all.collect { |d| [d.pregnant,
-                                            d.oral_glucose_tolerance,
-                                            d.blood_pressure,
-                                            d.skin_fold_thickness,
-                                            d.serum_insulin,
-                                            d.body_mass_index,
-                                            d.pedigree_function,
-                                            d.age,
-                                            d.positive] }
+    @training = Diabetic.first(460).collect { |d| [d.pregnant,
+                                                   d.oral_glucose_tolerance,
+                                                   d.blood_pressure,
+                                                   d.skin_fold_thickness,
+                                                   d.serum_insulin,
+                                                   d.body_mass_index,
+                                                   d.pedigree_function,
+                                                   d.age,
+                                                   d.positive] }
+
     @knn = KNN.new(@training)
   end
 
@@ -33,11 +34,15 @@ class KnnNumerical
     negative = data_points.select { |d| d[8] == 0 }.count
     decision = positive >= negative ? 1 : 0
 
-    return {:sample => sample, :distances => distances, :decision => decision}
+    return [{:sample => sample, :distances => distances, :decision => decision, :actual => sample[8]}]
   end
 
   def random
-    predict([random_input, random_input, random_input, random_input, random_input, random_input, random_input, random_input, [1, 0].sample])
+    results = []
+    Diabetic.last(308).each do |d|
+      results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
+    end
+    results.flatten!
   end
 
   def random_input (min=0.0, max=100.0)

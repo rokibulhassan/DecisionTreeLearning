@@ -13,7 +13,7 @@
     = f.input :pedigree_function
     = f.input :age
     = f.input :positive
-    = f.input :radios, label: 'radious (K)' if params[:knn_numerical].present?
+    = f.input :radius, label: 'radius (K)' if params[:knn_numerical].present?
 
   .form-actions
     = f.button :submit, value: 'Submit'
