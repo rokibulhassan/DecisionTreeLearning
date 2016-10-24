@@ -11,7 +11,7 @@ class KnnNumerical
   # 9. tested_positive -> Class variable (0 or 1)
 
   def initialize
-    @training = Diabetic.first(460).collect { |d| [d.pregnant,
+    @training = Diabetic.pick(460).collect { |d| [d.pregnant,
                                                    d.oral_glucose_tolerance,
                                                    d.blood_pressure,
                                                    d.skin_fold_thickness,
@@ -39,7 +39,7 @@ class KnnNumerical
 
   def random
     results = []
-    Diabetic.last(308).each do |d|
+    Diabetic.pick(308).each do |d|
       results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!
