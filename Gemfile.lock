@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/rokibulhassan/chartkick.git
+  revision: fbe33fdc271ef8ba1d9ea7498fb1c0220e489e62
+  specs:
+    chartkick (2.0.0)
+
+GIT
   remote: git://github.com/rokibulhassan/decisiontree.git
   revision: 20e7d8388e89c8974923bc2bab4092b28da556b3
   specs:
@@ -177,6 +183,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bootstrap-sass (~> 3.2.0)
+  chartkick!
   coffee-rails (~> 4.1.0)
   decisiontree!
   graphr

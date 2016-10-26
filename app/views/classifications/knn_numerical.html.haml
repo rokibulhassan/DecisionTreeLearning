@@ -1,8 +1,12 @@
 %div.row
   .col-md-10
-    %h1 Predicts(learn with 60% and test with 40%)
+    %h1 Predicts
   .col-md-2.text-right
     = link_to 'New Prediction', sample_classifications_path(:knn_numerical => true), :class => 'btn btn-sm btn-info'
+
+= pie_chart @pie_chart, {legend: 'none'}
+= line_chart @chart_data
+= line_chart @chart_data2
 
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead

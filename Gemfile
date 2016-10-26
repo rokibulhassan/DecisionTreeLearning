@@ -30,3 +30,4 @@ gem 'graphr'
 gem 'ruby-graphviz'
 
 gem 'knn'
+gem "chartkick", git: 'git://github.com/rokibulhassan/chartkick.git'
