@@ -1,8 +1,13 @@
 %div.row
   .col-md-10
-    %h1 Predicts
+    %h1 Predicts(Decision Tree)
   .col-md-2.text-right
     = link_to 'New Prediction', sample_classifications_path, :class => 'btn btn-sm btn-info'
+
+= pie_chart @pie_chart, {legend: 'none'}
+= line_chart @chart_data
+= line_chart @chart_data2
+
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
     %tr
@@ -25,6 +30,9 @@
       %td= @predicted_negative
       %td= @percent_positive
       %td= @percent_negative
+
+
+%h1 Samples
 
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead

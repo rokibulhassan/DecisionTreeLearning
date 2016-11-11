@@ -45,8 +45,4 @@ class KnnNumerical
     results.flatten!
   end
 
-  def random_input (min=0.0, max=100.0)
-    (rand * (max-min) + min).round(2)
-  end
-
 end

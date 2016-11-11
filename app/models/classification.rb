@@ -20,7 +20,7 @@ class Classification
                    'Diabetes pedigree function',
                    'Age (years)']
 
-    @training = Diabetic.all.collect { |d| [d.pregnant,
+    @training = Diabetic.pick(460).collect { |d| [d.pregnant,
                                             d.oral_glucose_tolerance,
                                             d.blood_pressure,
                                             d.skin_fold_thickness,
@@ -37,20 +37,17 @@ class Classification
     sample ||= @training.first
     decision = dec_tree.predict(sample)
 
-    return [{:sample => sample, :decision => decision}]
+    return [{:sample => sample, :decision => decision, :actual => sample[8]}]
   end
 
   def random
     results = []
-    5.times do
-      results << predict([random_input, random_input, random_input, random_input, random_input, random_input, random_input, random_input, [1, 0].sample])
+    Diabetic.pick(50).each do |d|
+      results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!
   end
 
-  def random_input (min=0.0, max=100.0)
-    (rand * (max-min) + min).round(2)
-  end
 
   def knowledge_base
     results = []

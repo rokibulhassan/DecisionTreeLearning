@@ -1,6 +1,6 @@
 %div.row
   .col-md-10
-    %h1 Predicts
+    %h1 Predicts(KNN)
   .col-md-2.text-right
     = link_to 'New Prediction', sample_classifications_path(:knn_numerical => true), :class => 'btn btn-sm btn-info'
 
@@ -35,16 +35,31 @@
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
     %tr
-      %th.text-center Sample
-      %th.text-center Actual
-      %th.text-center Predicted
+      %th Pregnant
+      %th Oral glucose tolerance
+      %th Blood pressure
+      %th Skin fold thickness
+      %th Serum insulin
+      %th Body mass index
+      %th Pedigree function
+      %th Age
+      %th Positive
+      %th Decision
 
-  %tbody.text-center
-    - @predictions.each do |prediction|
+  %tbody
+    - @predictions.each do |predict|
+      - diabetic = predict[:sample]
       %tr
-        %td= prediction[:sample]
-        %td= prediction[:actual]
-        %td= prediction[:decision]
+        %td= diabetic[0]
+        %td= diabetic[1]
+        %td= diabetic[2]
+        %td= diabetic[3]
+        %td= diabetic[4]
+        %td= diabetic[5]
+        %td= diabetic[6]
+        %td= diabetic[7]
+        %td= diabetic[8]
+        %td= predict[:decision]
 
 %h1 Distances
 
