@@ -20,7 +20,7 @@ class Classification
                    'Diabetes pedigree function',
                    'Age (years)']
 
-    @training = Diabetic.pick(400).collect { |d| [d.pregnant,
+    @training = Diabetic.pick(600).collect { |d| [d.pregnant,
                                             d.oral_glucose_tolerance,
                                             d.blood_pressure,
                                             d.skin_fold_thickness,
