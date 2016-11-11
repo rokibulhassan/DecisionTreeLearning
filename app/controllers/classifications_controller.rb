@@ -21,10 +21,17 @@ class ClassificationsController < ApplicationController
 
     @predicted_positive = 0
     @predicted_negative = 0
+    @correctly_classified = 0
+    @incorrectly_classified = 0
 
     @predictions.each do |prediction|
       sample = prediction[:sample]
       prediction[:actual] == prediction[:decision] ? @predicted_positive +=1 : @predicted_negative +=1
+      if prediction[:actual] == prediction[:decision]
+        @correctly_classified += 1
+      else
+        @incorrectly_classified += 1
+      end
       @chart_data << {name: sample, data: {pregnant: sample[0],
                                            oral_glucose_tolerance: sample[1],
                                            blood_pressure: sample[2],
@@ -47,9 +54,9 @@ class ClassificationsController < ApplicationController
 
     end
 
-    @percent_positive = calculate_accuracy(@actual_positive, @predicted_positive)
-    @percent_negative = calculate_accuracy(@actual_negative, @predicted_negative)
-    @pie_chart = [['actual positive', @actual_positive], ['actual negative', @actual_negative], ['predicted positive', @predicted_positive], ['predicted negative', @predicted_negative]]
+    @accuracy = get_accuracy(@correctly_classified, @predictions.count)
+    @inaccuracy = get_accuracy(@incorrectly_classified, @predictions.count)
+    @pie_chart = [['correctly classified', @accuracy], ['incorrectly classified', @inaccuracy]]
   end
 
 
@@ -76,10 +83,17 @@ class ClassificationsController < ApplicationController
 
     @predicted_positive = 0
     @predicted_negative = 0
+    @correctly_classified = 0
+    @incorrectly_classified = 0
 
     @predictions.each do |prediction|
       sample = prediction[:sample]
       prediction[:actual] == prediction[:decision] ? @predicted_positive +=1 : @predicted_negative +=1
+      if prediction[:actual] == prediction[:decision]
+        @correctly_classified += 1
+      else
+        @incorrectly_classified += 1
+      end
       @chart_data << {name: sample, data: {pregnant: sample[0],
                                            oral_glucose_tolerance: sample[1],
                                            blood_pressure: sample[2],
@@ -102,9 +116,9 @@ class ClassificationsController < ApplicationController
 
     end
 
-    @percent_positive = calculate_accuracy(@actual_positive, @predicted_positive)
-    @percent_negative = calculate_accuracy(@actual_negative, @predicted_negative)
-    @pie_chart = [['actual positive', @actual_positive], ['actual negative', @actual_negative], ['predicted positive', @predicted_positive], ['predicted negative', @predicted_negative]]
+    @accuracy = get_accuracy(@correctly_classified, @predictions.count)
+    @inaccuracy = get_accuracy(@incorrectly_classified, @predictions.count)
+    @pie_chart = [['correctly classified', @accuracy], ['incorrectly classified', @inaccuracy]]
   end
 
   def id3_tree
