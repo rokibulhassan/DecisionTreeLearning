@@ -42,7 +42,7 @@ class Classification
 
   def random
     results = []
-    Diabetic.pick(50).each do |d|
+    Diabetic.pick(30).each do |d|
       results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!
