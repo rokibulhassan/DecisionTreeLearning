@@ -16,22 +16,12 @@ class ClassificationsController < ApplicationController
 
     @predictions = sample.present? ? Classification.new.predict(sample) : Classification.new.random
 
-    @actual_positive = @predictions.select { |p| p[:sample][8] == 1 }.count
-    @actual_negative = @predictions.select { |p| p[:sample][8] == 0 }.count
-
-    @predicted_positive = 0
-    @predicted_negative = 0
     @correctly_classified = 0
     @incorrectly_classified = 0
 
     @predictions.each do |prediction|
       sample = prediction[:sample]
-      prediction[:actual] == prediction[:decision] ? @predicted_positive +=1 : @predicted_negative +=1
-      if prediction[:actual] == prediction[:decision]
-        @correctly_classified += 1
-      else
-        @incorrectly_classified += 1
-      end
+      prediction[:actual] == prediction[:decision] ? @correctly_classified +=1 : @incorrectly_classified +=1
       @chart_data << {name: sample, data: {pregnant: sample[0],
                                            oral_glucose_tolerance: sample[1],
                                            blood_pressure: sample[2],
@@ -78,22 +68,12 @@ class ClassificationsController < ApplicationController
 
     @predictions = sample.present? ? KnnNumerical.new.predict(sample, radius) : KnnNumerical.new.random
 
-    @actual_positive = @predictions.select { |p| p[:actual] == 1 }.count
-    @actual_negative = @predictions.select { |p| p[:actual] == 0 }.count
-
-    @predicted_positive = 0
-    @predicted_negative = 0
     @correctly_classified = 0
     @incorrectly_classified = 0
 
     @predictions.each do |prediction|
       sample = prediction[:sample]
-      prediction[:actual] == prediction[:decision] ? @predicted_positive +=1 : @predicted_negative +=1
-      if prediction[:actual] == prediction[:decision]
-        @correctly_classified += 1
-      else
-        @incorrectly_classified += 1
-      end
+      prediction[:actual] == prediction[:decision] ? @correctly_classified +=1 : @incorrectly_classified +=1
       @chart_data << {name: sample, data: {pregnant: sample[0],
                                            oral_glucose_tolerance: sample[1],
                                            blood_pressure: sample[2],

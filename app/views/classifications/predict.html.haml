@@ -4,30 +4,40 @@
   .col-md-2.text-right
     = link_to 'New Prediction', sample_classifications_path, :class => 'btn btn-sm btn-info'
 
-= pie_chart @pie_chart, {legend: 'none'}
-= line_chart @chart_data
-= line_chart @chart_data2
+.row.text-center
+  = line_chart @chart_data
+  Chart before Classification
 
+.row.text-center
+  = line_chart @chart_data2
+  Chart after Classification
+
+%h4 Classification Summary Table
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
     %tr
-      %th.text-center{:colspan => 2} Actual
-      %th.text-center{:colspan => 2} Predicted
-      %th.text-center Accuracy(%)
+      %th.text-center Decision Tree
+      %th.text-center{:colspan => 2} Prediction Result
+      %th.text-center{:colspan => 2} Accuracy
     %tr
-      %th.text-center Positive
-      %th.text-center Negative
-      %th.text-center Positive
-      %th.text-center Negative
+      %th.text-center Total instances:  768
+      %th.text-center Correctly classified instances
+      %th.text-center Incorrectly classified instances
+      %th.text-center Correctly classified instances
+      %th.text-center Incorrectly classified instances
 
   %tbody.text-center
     %tr
-      %td= @actual_positive
-      %td= @actual_negative
-      %td= @predicted_positive
-      %td= @predicted_negative
-      %td= @accuracy
+      %td
+        Training instances: 538 <br> Testing instances: 230
+      %td= @correctly_classified
+      %td= @incorrectly_classified
+      %td= "#{@accuracy} %"
+      %td= "#{@inaccuracy} %"
 
+.row.text-center
+  = pie_chart @pie_chart, {legend: 'none'}
+  Accuracy Chart
 
 %h1 Samples
 
@@ -42,7 +52,7 @@
       %th Body mass index
       %th Pedigree function
       %th Age
-      %th Positive
+      %th Class
       %th Decision
 
   %tbody
