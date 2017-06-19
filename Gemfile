@@ -31,3 +31,4 @@ gem 'ruby-graphviz'
 
 gem 'knn'
 gem "chartkick", git: 'git://github.com/rokibulhassan/chartkick.git'
+gem 'rb-libsvm', require: 'libsvm'

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :diabetics
   resources :classifications do
     collection do
+      get :svm
       get :knn_numerical
       get :predict
       get :knowledge_base

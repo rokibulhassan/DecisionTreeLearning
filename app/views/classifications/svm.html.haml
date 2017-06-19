@@ -1,0 +1,73 @@
+%div.row
+  .col-md-10
+    %h1 Predicts(SVM)
+  .col-md-2.text-right
+    = link_to 'New Prediction', sample_classifications_path(:knn_numerical => false), :class => 'btn btn-sm btn-info'
+
+.row.text-center
+  = line_chart @chart_data
+  Chart before Classification
+
+.row.text-center
+  = line_chart @chart_data2
+  Chart after Classification
+
+%h4 Classification Summary Table
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
+      %th.text-center SVM
+      %th.text-center{:colspan => 2} Prediction Result
+      %th.text-center{:colspan => 2} Accuracy
+    %tr
+      %th.text-center Total instances:  768
+      %th.text-center Correctly classified instances
+      %th.text-center Incorrectly classified instances
+      %th.text-center Correctly classified instances
+      %th.text-center Incorrectly classified instances
+
+  %tbody.text-center
+    %tr
+      %td
+        Training instances: 538 <br> Testing instances: 230
+      %td= @correctly_classified
+      %td= @incorrectly_classified
+      %td= "#{@accuracy} %"
+      %td= "#{@inaccuracy} %"
+
+.row.text-center
+  = pie_chart @pie_chart, {legend: 'none'}
+  Accuracy Chart
+
+
+
+%h1 Samples
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %thead
+    %tr
+      %th Pregnant
+      %th Oral glucose tolerance
+      %th Blood pressure
+      %th Skin fold thickness
+      %th Serum insulin
+      %th Body mass index
+      %th Pedigree function
+      %th Age
+      %th Class
+      %th Decision
+
+  %tbody
+    - @predictions.each do |predict|
+      - diabetic = predict[:sample]
+      %tr
+        %td= diabetic[0]
+        %td= diabetic[1]
+        %td= diabetic[2]
+        %td= diabetic[3]
+        %td= diabetic[4]
+        %td= diabetic[5]
+        %td= diabetic[6]
+        %td= diabetic[7]
+        %td= diabetic[8]
+        %td= predict[:decision]
+
