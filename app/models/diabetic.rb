@@ -4,8 +4,8 @@ class Diabetic < ActiveRecord::Base
 
   scope :positive, -> { where(positive: 1) }
   scope :negative, -> { where(positive: 0) }
-  # scope :pick, ->(n) { order("RANDOM()").limit(n) }
-  scope :pick, ->(n) { order("RAND()").limit(n) }
+  scope :pick, ->(n) { order("RANDOM()").limit(n) }
+  # scope :pick, ->(n) { order("RAND()").limit(n) }
 
   def self.import(file=nil)
     file_path = file.present? ? file.path : Rails.root.join("diabetic_data.csv")
