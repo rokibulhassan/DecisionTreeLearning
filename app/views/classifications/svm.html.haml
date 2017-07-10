@@ -1,6 +1,8 @@
 %div.row
-  .col-md-10
+  .col-md-8
     %h1 Predicts(SVM)
+  .col-md-2
+    = select_tag :kernel_type, options_for_select(['LINEAR', 'POLY', 'RBF', 'SIGMOID', 'PRECOMPUTED'], @kernel_type), prompt: "Select Kernel Type", class: "form-control"
   .col-md-2.text-right
     = link_to 'New Prediction', sample_classifications_path(:knn_numerical => false), :class => 'btn btn-sm btn-info'
 
@@ -40,7 +42,6 @@
   Accuracy Chart
 
 
-
 %h1 Samples
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %thead
@@ -71,3 +72,7 @@
         %td= diabetic[8]
         %td= predict[:decision]
 
+:javascript
+  $('#kernel_type').change(function () {
+    window.location = '/classifications/svm?kernel_type=' + $(this).val();
+  });

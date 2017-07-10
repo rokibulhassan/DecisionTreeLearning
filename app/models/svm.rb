@@ -15,23 +15,21 @@ class Svm
   #1. labels -> result/positive/negative (0 or 1)
   #2. examples -> training data without result
 
-  def initialize
+  def initialize(kernel_type='RBF')
     @training = Diabetic.pick(460).collect { |d| [d.pregnant,
-                                                 d.oral_glucose_tolerance,
-                                                 d.blood_pressure,
-                                                 d.skin_fold_thickness,
-                                                 d.serum_insulin,
-                                                 d.body_mass_index,
-                                                 d.pedigree_function,
-                                                 d.age,
-                                                 d.positive] }
+                                                  d.oral_glucose_tolerance,
+                                                  d.blood_pressure,
+                                                  d.skin_fold_thickness,
+                                                  d.serum_insulin,
+                                                  d.body_mass_index,
+                                                  d.pedigree_function,
+                                                  d.age,
+                                                  d.positive] }
 
 
     @problem = Libsvm::Problem.new
     @parameter = Libsvm::SvmParameter.new
-    @kernels = Libsvm::KernelType
-
-    @parameter.kernel_type = Libsvm::KernelType::RBF
+    @parameter.kernel_type = "Libsvm::KernelType::#{kernel_type}".constantize
     @parameter.cache_size = 100 # in megabytes
     @parameter.eps = 0.001
     @parameter.c = 10
@@ -54,7 +52,7 @@ class Svm
 
   def random
     results = []
-    Diabetic.pick(50).each do |d|
+    Diabetic.pick(230).each do |d|
       results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!

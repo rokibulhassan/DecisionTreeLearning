@@ -105,6 +105,7 @@ class ClassificationsController < ApplicationController
     @chart_data = []
     @chart_data2 = []
     diabetic = params[:diabetic]
+    @kernel_type = params[:kernel_type] || 'RBF'
 
     sample = [diabetic[:pregnant].to_f,
               diabetic[:oral_glucose_tolerance].to_f,
@@ -116,7 +117,8 @@ class ClassificationsController < ApplicationController
               diabetic[:age].to_f,
               diabetic[:positive].to_i] if diabetic.present?
 
-    @predictions = sample.present? ? Svm.new.predict(sample) : Svm.new.random
+    svm = Svm.new(@kernel_type)
+    @predictions = sample.present? ? svm.predict(sample) : svm.random
 
     @correctly_classified = 0
     @incorrectly_classified = 0
