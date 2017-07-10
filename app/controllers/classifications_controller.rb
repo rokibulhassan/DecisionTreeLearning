@@ -105,7 +105,6 @@ class ClassificationsController < ApplicationController
     @chart_data = []
     @chart_data2 = []
     diabetic = params[:diabetic]
-    radius = diabetic[:radios].to_i if diabetic.present?
 
     sample = [diabetic[:pregnant].to_f,
               diabetic[:oral_glucose_tolerance].to_f,

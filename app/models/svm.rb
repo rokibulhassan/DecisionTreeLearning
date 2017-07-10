@@ -16,7 +16,7 @@ class Svm
   #2. examples -> training data without result
 
   def initialize
-    @training = Diabetic.pick(50).collect { |d| [d.pregnant,
+    @training = Diabetic.pick(460).collect { |d| [d.pregnant,
                                                  d.oral_glucose_tolerance,
                                                  d.blood_pressure,
                                                  d.skin_fold_thickness,
@@ -29,11 +29,13 @@ class Svm
 
     @problem = Libsvm::Problem.new
     @parameter = Libsvm::SvmParameter.new
+    @kernels = Libsvm::KernelType
 
-    @parameter.cache_size = 2 # in megabytes
-
+    @parameter.kernel_type = Libsvm::KernelType::RBF
+    @parameter.cache_size = 100 # in megabytes
     @parameter.eps = 0.001
     @parameter.c = 10
+
 
     @labels = @training.collect { |t| t.pop }
     @examples = @training.map { |ary| Libsvm::Node.features(ary) }
@@ -52,7 +54,7 @@ class Svm
 
   def random
     results = []
-    Diabetic.pick(5).each do |d|
+    Diabetic.pick(50).each do |d|
       results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!
