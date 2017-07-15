@@ -16,15 +16,16 @@ class Svm
   #2. examples -> training data without result
 
   def initialize(kernel_type='RBF')
-    @training = Diabetic.pick(460).collect { |d| [d.pregnant,
-                                                  d.oral_glucose_tolerance,
-                                                  d.blood_pressure,
-                                                  d.skin_fold_thickness,
-                                                  d.serum_insulin,
-                                                  d.body_mass_index,
-                                                  d.pedigree_function,
-                                                  d.age,
-                                                  d.positive] }
+    @training_data_set = Diabetic.pick(538)
+    @training = @training_data_set.collect {|d| [d.pregnant,
+                                                 d.oral_glucose_tolerance,
+                                                 d.blood_pressure,
+                                                 d.skin_fold_thickness,
+                                                 d.serum_insulin,
+                                                 d.body_mass_index,
+                                                 d.pedigree_function,
+                                                 d.age,
+                                                 d.positive]}
 
 
     @problem = Libsvm::Problem.new
@@ -35,8 +36,8 @@ class Svm
     @parameter.c = 10
 
 
-    @labels = @training.collect { |t| t.pop }
-    @examples = @training.map { |ary| Libsvm::Node.features(ary) }
+    @labels = @training.collect {|t| t.pop}
+    @examples = @training.map {|ary| Libsvm::Node.features(ary)}
 
 
     @problem.set_examples(@labels, @examples)
@@ -52,7 +53,7 @@ class Svm
 
   def random
     results = []
-    Diabetic.pick(230).each do |d|
+    Diabetic.excludes(@training_data_set.collect(&:id)).each do |d|
       results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!

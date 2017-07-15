@@ -20,7 +20,8 @@ class Classification
                    'Diabetes pedigree function',
                    'Age (years)']
 
-    @training = Diabetic.pick(600).collect { |d| [d.pregnant,
+    @training_data_set = Diabetic.pick(538)
+    @training = @training_data_set.collect { |d| [d.pregnant,
                                             d.oral_glucose_tolerance,
                                             d.blood_pressure,
                                             d.skin_fold_thickness,
@@ -42,7 +43,7 @@ class Classification
 
   def random
     results = []
-    Diabetic.pick(10).each do |d|
+    Diabetic.excludes(@training_data_set.collect(&:id)).each do |d|
       results << predict([d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive])
     end
     results.flatten!
