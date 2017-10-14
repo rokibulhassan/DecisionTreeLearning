@@ -39,6 +39,8 @@
   = pie_chart @pie_chart, {legend: 'none'}
   Accuracy Chart
 
+= render partial: 'confusion_matrix', locals: {predictions: @predictions}
+
 %h1 Samples
 
 %table.table.table-bordered.table-hover.table-striped.table-responsive
@@ -54,6 +56,7 @@
       %th Age
       %th Class
       %th Decision
+      %th Predicted Class
 
   %tbody
     - @predictions.each do |predict|
@@ -69,3 +72,4 @@
         %td= diabetic[7]
         %td= diabetic[8]
         %td= predict[:decision]
+        %td= predict_class(diabetic[8], predict[:decision])

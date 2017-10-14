@@ -40,23 +40,7 @@
   Accuracy Chart
 
 
-%h1 Confusion Matrix
-%table.table.table-bordered.table-hover.table-striped.table-responsive
-  %tbody
-    - confusion_matrix = confusion_matrix(@predictions)
-    %tr
-      %td= "TP => #{confusion_matrix[:tp]}"
-      %td= "TN => #{confusion_matrix[:tn]}"
-    %tr
-      %td= "FP => #{confusion_matrix[:fp]}"
-      %td= "FN => #{confusion_matrix[:fn]}"
-    %trc
-      %td= "Accuracy => #{confusion_matrix[:accuracy]}"
-      %td= "Sensitivity => #{confusion_matrix[:sensitivity]}"
-    %tr
-      %td= "Speciality => #{confusion_matrix[:speciality]}"
-      %td= "Precision => #{confusion_matrix[:precision]}"
-
+= render partial: 'confusion_matrix', locals: {predictions: @predictions}
 
 %h1 Samples
 %table.table.table-bordered.table-hover.table-striped.table-responsive
