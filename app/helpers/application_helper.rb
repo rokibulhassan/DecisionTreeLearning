@@ -8,4 +8,28 @@ module ApplicationHelper
     result = (actual.to_f/total)*100
     result.round(2)
   end
+
+  def predict_class(original, prediction)
+    return 'TN' if original == 0 && prediction == 0
+    return 'FP' if original == 0 && prediction == 1
+    return 'TP' if original == 1 && prediction == 1
+    return 'FN' if original == 1 && prediction == 0
+  end
+
+  def confusion_matrix(data_samples)
+    true_positive = 0
+    true_negative = 0
+    false_positive = 0
+    false_negative = 0
+
+    data_samples.each do |sample|
+      diabetic = sample[:sample]
+      prediction_class = predict_class(diabetic[8], sample[:decision])
+      true_positive += 1 if prediction_class == 'TP'
+      true_negative += 1 if prediction_class == 'TN'
+      false_positive += 1 if prediction_class == 'FP'
+      false_negative += 1 if prediction_class == 'FN'
+    end
+    {tp: true_positive, tn: true_negative, fp: false_positive, fn: false_negative}
+  end
 end

@@ -40,6 +40,17 @@
   Accuracy Chart
 
 
+%h1 Confusion Matrix
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %tbody
+    - confusion_matrix = confusion_matrix(@predictions)
+    %tr
+      %td= "TP => #{confusion_matrix[:tp]}"
+      %td= "TN => #{confusion_matrix[:tn]}"
+    %tr
+      %td= "FP => #{confusion_matrix[:fp]}"
+      %td= "FN => #{confusion_matrix[:fn]}"
+
 
 %h1 Samples
 %table.table.table-bordered.table-hover.table-striped.table-responsive
@@ -55,6 +66,7 @@
       %th Age
       %th Class
       %th Decision
+      %th Predicted Class
 
   %tbody
     - @predictions.each do |predict|
@@ -70,6 +82,7 @@
         %td= diabetic[7]
         %td= diabetic[8]
         %td= predict[:decision]
+        %td= predict_class(diabetic[8], predict[:decision])
 
 %h1 Distances
 
