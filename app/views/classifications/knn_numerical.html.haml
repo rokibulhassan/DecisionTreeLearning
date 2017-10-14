@@ -50,6 +50,12 @@
     %tr
       %td= "FP => #{confusion_matrix[:fp]}"
       %td= "FN => #{confusion_matrix[:fn]}"
+    %trc
+      %td= "Accuracy => #{confusion_matrix[:accuracy]}"
+      %td= "Sensitivity => #{confusion_matrix[:sensitivity]}"
+    %tr
+      %td= "Speciality => #{confusion_matrix[:speciality]}"
+      %td= "Precision => #{confusion_matrix[:precision]}"
 
 
 %h1 Samples

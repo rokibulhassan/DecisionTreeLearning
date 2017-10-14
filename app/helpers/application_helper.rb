@@ -30,6 +30,19 @@ module ApplicationHelper
       false_positive += 1 if prediction_class == 'FP'
       false_negative += 1 if prediction_class == 'FN'
     end
-    {tp: true_positive, tn: true_negative, fp: false_positive, fn: false_negative}
+
+    accuracy = (true_positive + true_negative).to_f/(true_positive + true_negative + false_positive + false_negative)
+    sensitivity = true_positive.to_f/(true_positive + false_negative)
+    speciality = true_negative.to_f/(true_negative + false_positive)
+    precision = true_positive.to_f/(true_positive + false_positive)
+
+    {tp: true_positive,
+     tn: true_negative,
+     fp: false_positive,
+     fn: false_negative,
+     accuracy: accuracy.round(4),
+     sensitivity: sensitivity.round(4),
+     speciality: speciality.round(4),
+     precision: precision.round(4)}
   end
 end
