@@ -16,7 +16,7 @@ module ApplicationHelper
     return 'FN' if original == 1 && prediction == 0
   end
 
-  def confusion_matrix(data_samples)
+  def confusion_matrix(data_samples, svm=false)
     true_positive = 0
     true_negative = 0
     false_positive = 0
@@ -24,7 +24,7 @@ module ApplicationHelper
 
     data_samples.each do |sample|
       diabetic = sample[:sample]
-      prediction_class = predict_class(diabetic[8], sample[:decision])
+      prediction_class = predict_class(svm ? sample[:actual] : diabetic[8], sample[:decision])
       true_positive += 1 if prediction_class == 'TP'
       true_negative += 1 if prediction_class == 'TN'
       false_positive += 1 if prediction_class == 'FP'

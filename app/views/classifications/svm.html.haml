@@ -72,7 +72,7 @@
         %td= diabetic[7]
         %td= predict[:actual]
         %td= predict[:decision]
-        %td= predict_class(diabetic[8], predict[:decision])
+        %td= predict_class(predict[:actual], predict[:decision])
 
 :javascript
   $('#kernel_type').change(function () {
