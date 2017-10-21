@@ -49,16 +49,6 @@ class ClassificationsController < ApplicationController
     @pie_chart = [['correctly classified', @accuracy], ['incorrectly classified', @inaccuracy]]
   end
 
-  def predict_cross
-    batch = 77
-    @predictions = []
-
-    1.times do |n|
-      @predictions << ClassificationCross.new(batch, batch*n).predict
-    end
-  end
-
-
   def knn_numerical
     @chart_data = []
     @chart_data2 = []
@@ -111,14 +101,7 @@ class ClassificationsController < ApplicationController
   end
 
 
-  def knn_numerical_cross
-    batch = 77
-    @predictions = []
 
-    10.times do |n|
-      @predictions << KnnNumericalCross.new(batch, batch*n).predict
-    end
-  end
 
   def svm
     @chart_data = []
@@ -170,6 +153,24 @@ class ClassificationsController < ApplicationController
     @accuracy = get_accuracy(@correctly_classified, @predictions.count)
     @inaccuracy = get_accuracy(@incorrectly_classified, @predictions.count)
     @pie_chart = [['correctly classified', @accuracy], ['incorrectly classified', @inaccuracy]]
+  end
+
+  def predict_cross
+    batch = 77
+    @predictions = []
+
+    10.times do |n|
+      @predictions << ClassificationCross.new(batch, batch*n).predict
+    end
+  end
+
+  def knn_numerical_cross
+    batch = 77
+    @predictions = []
+
+    10.times do |n|
+      @predictions << KnnNumericalCross.new(batch, batch*n).predict
+    end
   end
 
   def svm_cross
