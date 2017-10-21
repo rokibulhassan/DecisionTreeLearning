@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do
       get :svm
       get :knn_numerical
+      get :knn_numerical_cross
       get :predict
       get :knowledge_base
       get :id3_tree

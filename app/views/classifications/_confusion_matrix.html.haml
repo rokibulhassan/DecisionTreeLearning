@@ -1,4 +1,4 @@
-%h1 Confusion Matrix
+%h4 Confusion Matrix
 %table.table.table-bordered.table-hover.table-striped.table-responsive
   %tbody
     - confusion_matrix = confusion_matrix(predictions, true)
@@ -12,5 +12,5 @@
       %td= "Accuracy:  #{confusion_matrix[:accuracy]}"
       %td= "Sensitivity:  #{confusion_matrix[:sensitivity]}"
     %tr
-      %td= "Speciality:  #{confusion_matrix[:speciality]}"
+      %td= "Specificity:  #{confusion_matrix[:speciality]}"
       %td= "Precision:  #{confusion_matrix[:precision]}"

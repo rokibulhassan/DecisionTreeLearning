@@ -101,6 +101,15 @@ class ClassificationsController < ApplicationController
     @pie_chart = [['correctly classified', @accuracy], ['incorrectly classified', @inaccuracy]]
   end
 
+
+  def knn_numerical_cross
+    batch = 77
+    @predictions = []
+    10.times do |n|
+      @predictions << KnnNumericalCross.new(batch, batch*n).predict
+    end
+  end
+
   def svm
     @chart_data = []
     @chart_data2 = []
