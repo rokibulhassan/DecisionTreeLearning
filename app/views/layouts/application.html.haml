@@ -24,6 +24,7 @@
           %ul.nav.navbar-nav.navbar-right.navbar-user
             %li= link_to 'Generate Tree', id3_tree_classifications_path, :'data-no-turbolink' => true, :target => '_blank'
             %li= link_to 'Decision Tree', predict_classifications_path
+            %li= link_to 'Decision Tree Cross', predict_cross_classifications_path
             %li= link_to 'KNN Numerical', knn_numerical_classifications_path
             %li= link_to 'KNN Numerical Cross', knn_numerical_cross_classifications_path
             %li= link_to 'SVM', svm_classifications_path
