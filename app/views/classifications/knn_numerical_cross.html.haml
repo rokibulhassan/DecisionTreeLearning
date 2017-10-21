@@ -32,3 +32,9 @@
   %br
   %hr
 
+%h4 Result
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %tbody
+    %tr
+      %td= "Average accuracy:  #{average_accuracy(@predictions)} %"
+      %td= "Standard Deviation: #{standard_deviation(@predictions)} "

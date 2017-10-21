@@ -11,7 +11,6 @@ class KnnNumericalCross
   # 9. tested_positive -> Class variable (0 or 1)
 
   def initialize(limit=77, offset=0)
-    ap offset
     @test_data_set = Diabetic.limit(limit).offset(offset)
     @training_data_set = Diabetic.excludes(@test_data_set.collect(&:id))
 

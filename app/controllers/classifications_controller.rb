@@ -105,6 +105,7 @@ class ClassificationsController < ApplicationController
   def knn_numerical_cross
     batch = 77
     @predictions = []
+
     10.times do |n|
       @predictions << KnnNumericalCross.new(batch, batch*n).predict
     end

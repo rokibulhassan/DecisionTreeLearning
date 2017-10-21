@@ -61,6 +61,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    descriptive_statistics (2.5.1)
     distance_measures (0.0.6)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -187,6 +188,7 @@ DEPENDENCIES
   chartkick!
   coffee-rails (~> 4.1.0)
   decisiontree!
+  descriptive_statistics
   graphr
   haml-rails
   jbuilder (~> 2.0)

@@ -2,7 +2,7 @@ module ApplicationHelper
   def calculate_accuracy(actual, prediction)
     result = actual > prediction ? (prediction.to_f/actual)*100 : (actual.to_f/prediction)*100
     result.round(2)
-    end
+  end
 
   def get_accuracy(actual, total)
     result = (actual.to_f/total)*100
@@ -44,5 +44,15 @@ module ApplicationHelper
      sensitivity: sensitivity.round(4),
      speciality: speciality.round(4),
      precision: precision.round(4)}
+  end
+
+  def average_accuracy(predictions)
+    samples = predictions.collect {|p| p[:accuracy]}
+    samples.mean.round(2)
+  end
+
+  def standard_deviation(predictions)
+    samples = predictions.collect {|p| p[:accuracy]}
+    samples.standard_deviation.round(2)
   end
 end
