@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :classifications do
     collection do
       get :svm
+      get :svm_cross
       get :knn_numerical
       get :knn_numerical_cross
       get :predict

@@ -163,6 +163,16 @@ class ClassificationsController < ApplicationController
     @pie_chart = [['correctly classified', @accuracy], ['incorrectly classified', @inaccuracy]]
   end
 
+  def svm_cross
+    batch = 77
+    @predictions = []
+    @kernel_type = params[:kernel_type] || 'RBF'
+
+    10.times do |n|
+      @predictions << SvmCross.new(@kernel_type, batch, batch*n).predict
+    end
+  end
+
   def id3_tree
     pdf_filename = File.join(Rails.root, "public/id3_tree.pdf")
     send_file(pdf_filename, :filename => "id3_tree.pdf", :disposition => 'inline', :type => "application/pdf")

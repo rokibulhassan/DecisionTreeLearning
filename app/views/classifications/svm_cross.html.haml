@@ -1,0 +1,47 @@
+%div.row
+  .col-md-8
+    %h1 Predicts(SVM)
+  .col-md-2
+    = select_tag :kernel_type, options_for_select(['LINEAR', 'POLY', 'RBF', 'SIGMOID', 'PRECOMPUTED'], @kernel_type), prompt: "Select Kernel Type", class: "form-control"
+
+- @predictions.each_with_index do |prediction, index|
+  %h2= index
+  %h4 Classification Summary Table
+  %table.table.table-bordered.table-hover.table-striped.table-responsive
+    %thead
+      %tr
+        %th.text-center KNN
+        %th.text-center{:colspan => 2} Prediction Result
+        %th.text-center{:colspan => 2} Accuracy
+      %tr
+        %th.text-center Total instances:  768
+        %th.text-center Correctly classified instances
+        %th.text-center Incorrectly classified instances
+        %th.text-center Correctly classified instances
+        %th.text-center Incorrectly classified instances
+
+    %tbody.text-center
+      %tr
+        %td= "Training instances: #{prediction[:training_instances]} <br> Testing instances: #{prediction[:test_instances]}".html_safe
+        %td= prediction[:correctly_classified]
+        %td= prediction[:incorrectly_classified]
+        %td= "#{prediction[:accuracy]} %"
+        %td= "#{prediction[:inaccuracy]} %"
+
+
+  = render partial: 'confusion_matrix', locals: {predictions: prediction[:data]}
+
+  %br
+  %hr
+
+%h4 Result
+%table.table.table-bordered.table-hover.table-striped.table-responsive
+  %tbody
+    %tr
+      %td= "Average accuracy:  #{average_accuracy(@predictions)} %"
+      %td= "Standard Deviation: #{standard_deviation(@predictions)} "
+
+:javascript
+  $('#kernel_type').change(function () {
+    window.location = '/classifications/svm_cross?kernel_type=' + $(this).val();
+  });
