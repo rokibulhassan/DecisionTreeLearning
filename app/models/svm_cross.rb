@@ -26,10 +26,15 @@ class SvmCross
     @problem = Libsvm::Problem.new
     @parameter = Libsvm::SvmParameter.new
     @parameter.kernel_type = "Libsvm::KernelType::#{kernel_type}".constantize
-    @parameter.cache_size = 100 # in megabytes
+    @parameter.svm_type = Libsvm::SvmType::NU_SVC unless ['PRECOMPUTED'].include?(kernel_type)
+    @parameter.cache_size = 200 # in megabytes
     @parameter.eps = 0.001
-    @parameter.c = 10
+    @parameter.c = 100
+    @parameter.nu = 0.0001
 
+    @parameter.gamma = 0.1 if ['RBF', 'SIGMOID', 'POLY'].include?(kernel_type)
+    @parameter.degree = 1 if ['POLY'].include?(kernel_type)
+    @parameter.coef0 = 0.1 if ['SIGMOID', 'POLY'].include?(kernel_type)
 
     @labels = @training.collect {|t| t.pop}
     @examples = @training.map {|ary| Libsvm::Node.features(ary)}
