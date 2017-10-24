@@ -4,6 +4,8 @@
   .col-md-2
     = select_tag :kernel_type, options_for_select(['LINEAR', 'POLY', 'RBF', 'SIGMOID', 'PRECOMPUTED'], @kernel_type), prompt: "Select Kernel Type", class: "form-control"
 
+  = render partial: 'feature_selection', locals: {search_path: svm_cross_classifications_path}
+
 - @predictions.each_with_index do |prediction, index|
   %h2= index
   %h4 Classification Summary Table

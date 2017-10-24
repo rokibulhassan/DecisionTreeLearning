@@ -2,8 +2,9 @@
   %h3 Feature Selection
   = simple_form_for(:search, url: search_path, method: :get, wrapper: 'horizontal_form') do |f|
     .form-inputs
+      = hidden_field_tag :kernel_type, @kernel_type if @kernel_type.present?
       = f.collection_check_boxes :features, Diabetic::FEATURES.collect{|a| [a, a.to_s.camelcase]}, :first, :last do |b|
-        = b.label(class: "check_box check_box_#{ b.value}") { b.check_box(checked: b.text == 'Positive') + b.text }
+        = b.label(class: "check_box check_box_#{ b.value}") { b.check_box(checked: (b.value == :positive || (@features.present? && @features.include?(b.value.to_s))) ) + b.text }
 
       .form-actions
         = f.button :submit, value: 'Submit'

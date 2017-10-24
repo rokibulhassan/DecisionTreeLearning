@@ -176,9 +176,10 @@ class ClassificationsController < ApplicationController
     batch = 77
     @predictions = []
     @kernel_type = params[:kernel_type] || 'RBF'
+    @features = params[:search][:features].reject {|f| f.empty?} if params[:search].present?
 
     10.times do |n|
-      @predictions << SvmCross.new(@kernel_type, batch, batch*n).predict
+      @predictions << SvmCross.new(batch, batch*n, @kernel_type, @features).predict
     end
   end
 
