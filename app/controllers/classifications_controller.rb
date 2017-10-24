@@ -101,8 +101,6 @@ class ClassificationsController < ApplicationController
   end
 
 
-
-
   def svm
     @chart_data = []
     @chart_data2 = []
@@ -167,9 +165,10 @@ class ClassificationsController < ApplicationController
   def knn_numerical_cross
     batch = 77
     @predictions = []
+    @features = params[:search][:features].reject {|f| f.empty?} if params[:search].present?
 
     10.times do |n|
-      @predictions << KnnNumericalCross.new(batch, batch*n).predict
+      @predictions << KnnNumericalCross.new(batch, batch*n, @features).predict
     end
   end
 

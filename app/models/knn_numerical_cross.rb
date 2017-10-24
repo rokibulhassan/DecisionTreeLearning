@@ -10,19 +10,13 @@ class KnnNumericalCross
   # 8. age -> Age (years)
   # 9. tested_positive -> Class variable (0 or 1)
 
-  def initialize(limit=77, offset=0)
+  def initialize(limit=77, offset=0, features=nil)
+    @features = features||Diabetic::FEATURES
+
     @test_data_set = Diabetic.limit(limit).offset(offset)
     @training_data_set = Diabetic.excludes(@test_data_set.collect(&:id))
 
-    @training = @training_data_set.collect {|d| [d.pregnant,
-                                                 d.oral_glucose_tolerance,
-                                                 d.blood_pressure,
-                                                 d.skin_fold_thickness,
-                                                 d.serum_insulin,
-                                                 d.body_mass_index,
-                                                 d.pedigree_function,
-                                                 d.age,
-                                                 d.positive]}
+    @training = @training_data_set.collect {|d| @features.collect {|f| d.send(f)}}
 
     @knn = KNN.new(@training)
   end
@@ -37,13 +31,14 @@ class KnnNumericalCross
 
     @test_data_set.each do |d|
       actual = d.positive
-      sample = [d.pregnant, d.oral_glucose_tolerance, d.blood_pressure, d.skin_fold_thickness, d.serum_insulin, d.body_mass_index, d.pedigree_function, d.age, d.positive]
+      sample = @features.collect {|f| d.send(f)}
 
       distances = @knn.nearest_neighbours(sample, k)
 
       data_points = distances.collect {|d| d[2]}
-      positive = data_points.select {|d| d[8] == 1}.count
-      negative = data_points.select {|d| d[8] == 0}.count
+      positive = data_points.select {|d| d.last == 1}.count
+      negative = data_points.select {|d| d.last == 0}.count
+
       decision = positive >= negative ? 1 : 0
 
       actual == decision ? correctly_classified +=1 : incorrectly_classified +=1

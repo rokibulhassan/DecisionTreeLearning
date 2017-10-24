@@ -2,6 +2,8 @@ class Diabetic < ActiveRecord::Base
 
   attr_accessor :radius
 
+  FEATURES = [:pregnant, :oral_glucose_tolerance, :blood_pressure, :skin_fold_thickness, :serum_insulin, :body_mass_index, :pedigree_function, :age, :positive]
+
   scope :positive, -> {where(positive: 1)}
   scope :negative, -> {where(positive: 0)}
   scope :excludes, ->(ids) {where('id not in(?)', ids)}

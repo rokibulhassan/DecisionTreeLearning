@@ -15,3 +15,11 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+input[type="checkbox"] {
+  margin: 10px !important;
+}
+
+.check_box_positive {
+  display: none;
+}

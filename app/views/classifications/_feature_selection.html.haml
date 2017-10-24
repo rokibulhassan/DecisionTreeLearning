@@ -1,0 +1,9 @@
+.col-md-12
+  %h3 Feature Selection
+  = simple_form_for(:search, url: search_path, method: :get, wrapper: 'horizontal_form') do |f|
+    .form-inputs
+      = f.collection_check_boxes :features, Diabetic::FEATURES.collect{|a| [a, a.to_s.camelcase]}, :first, :last do |b|
+        = b.label(class: "check_box check_box_#{ b.value}") { b.check_box(checked: b.text == 'Positive') + b.text }
+
+      .form-actions
+        = f.button :submit, value: 'Submit'

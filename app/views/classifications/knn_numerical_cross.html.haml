@@ -1,6 +1,7 @@
 %div.row
   .col-md-10
     %h1 Predicts(KNN Cross)
+  = render partial: 'feature_selection', locals: {search_path: knn_numerical_cross_classifications_path}
 
 - @predictions.each_with_index do |prediction, index|
   %h2= index
