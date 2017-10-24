@@ -156,9 +156,10 @@ class ClassificationsController < ApplicationController
   def predict_cross
     batch = 77
     @predictions = []
+    @features = params[:search][:features].reject {|f| f.empty?} if params[:search].present?
 
     10.times do |n|
-      @predictions << ClassificationCross.new(batch, batch*n).predict
+      @predictions << ClassificationCross.new(batch, batch*n, @features).predict
     end
   end
 
