@@ -32,9 +32,9 @@ class SvmCross
     @parameter.c = 100
     @parameter.nu = 0.0001
 
-    @parameter.gamma = 0.1 if ['RBF', 'SIGMOID', 'POLY'].include?(kernel_type)
     @parameter.degree = 1 if ['POLY'].include?(kernel_type)
     @parameter.coef0 = 0.1 if ['SIGMOID', 'POLY'].include?(kernel_type)
+    @parameter.gamma = 0.1 if ['RBF', 'SIGMOID', 'POLY'].include?(kernel_type)
 
     @labels = @training.collect {|t| t.pop}
     @examples = @training.map {|ary| Libsvm::Node.features(ary)}
