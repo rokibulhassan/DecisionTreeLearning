@@ -19,15 +19,6 @@ class ClassificationCross
     @training = @training_data_set.collect {|d| @features.collect {|f| d.send(f)}}
   end
 
-  def predictxx
-    dec_tree = DecisionTree::ID3Tree.new(@attributes, @training, 1, :continuous)
-    dec_tree.train
-    sample ||= @training.first
-    decision = dec_tree.predict(sample)
-
-    return [{:sample => sample, :decision => decision, :actual => sample[8]}]
-  end
-
   def predict
     results = []
 
